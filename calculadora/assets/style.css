@@ -1,0 +1,91 @@
+/* Reseta as margens e centraliza a calculadora na tela (opcional) */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+/* Corpo da calculadora */
+.calculator {
+  width: 300px;
+  background-color: #222;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Tela onde os números aparecem */
+.display {
+  background-color: #333;
+  color: #fff;
+  font-size: 2.5rem;
+  text-align: right;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+  word-wrap: break-word;
+}
+
+/* Grid para organizar os botões em 4 colunas */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+/* Estilo padrão de todos os botões */
+.btn {
+  background-color: #444;
+  color: #fff;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 8px;
+  padding: 20px 0;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+/* Efeito ao passar o mouse e clicar */
+.btn:hover {
+  background-color: #555;
+}
+.btn:active {
+  transform: scale(0.95);
+}
+
+/* Cores específicas para operadores (+, -, *, /) */
+.operator {
+  background-color: #ff9500;
+  color: white;
+}
+.operator:hover {
+  background-color: #e08300;
+}
+
+/* Cor específica para o botão Limpar (C) */
+.clear {
+  background-color: #ff3b30;
+}
+.clear:hover {
+  background-color: #e03026;
+}
+
+/* Botão de Igual (Ocupa 2 linhas na direita) */
+.equal {
+  background-color: #34c759;
+  grid-column: 4;
+  grid-row: 3 / span 3; /* Começa na linha 3 e estica por 3 linhas */
+}
+.equal:hover {
+  background-color: #2da94c;
+}
+
+/* Botão Zero (Ocupa 2 colunas embaixo) */
+.zero {
+  grid-column: 1 / span 2; /* Começa na coluna 1 e estica por 2 colunas */
+}
