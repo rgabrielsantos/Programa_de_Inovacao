@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios funções</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <header>
+        <img src="" alt="">
+        <nav>
+            <ul id="menu">
+                <li><a href="#questao1">Questão 1</a></li>
+                <li><a href="#questao2">Questão 2</a></li>
+                <li><a href="#questao3">Questão 3</a></li>
+                <li><a href="#questao4">Questão 4</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Exercitando funções</h1>
+    <main>
+        <section id="questao1">
+            <h2>Questão 1:</h2>
+            <p>
+                Crie uma função normalizarNome(nome) que: <br>
+                - receba um nome como "jõao da silva"; <br>
+                - remova os espaços extras do início e do fim com trim(); <br>
+                - divida o nome em partes usando split();<br>
+                - percorra as partes com forEach(); <br>
+                - transforme cada parte para começar com letra maiúscula usando slice(); <br>
+                - retorne o nome completo formatado. <br>
+                Depois, use a função em um array de nomes e exiba os resultados.
+            </p>
+            
+            
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome">
+                <button id="btn">enviar</button>
+                <p id="exibirNome"></p>
+        
+        </section>
+
+        <section id="questao2">
+            <h2>Questão 2:</h2>
+            <p>
+                Considere o array: <br>
+                const produtos = ["Notebook - eletrônico","Mouse - Eletrônico","Cadeira - Móvel", "Teclado -
+                Eletrônico","Mesa - Móvel"];
+                <br>
+                Crie um filtro em que a pessoa consiga usar um select para selecionar a categoria do produto (eletrônico
+                ou móvel) e seja exibido uma imagem e o nome do produto.
+                Use uma função que faça a filtragem do array com base na categoria informada.
+            </p>   
+
+            <select id="categoria">
+                <option value="" disabled selected>selecione uma opção</option>
+                <option value="eletronico">Eletrônico</option>
+                <option value="movel">Móvel</option>
+            </select>  
+            <button id="selecao">filtrar</button>
+            <div id="resultadoFiltragem"></div>
+        </section>
+    </main>
+    <script src="assets/javascript/script.js"></script>
+</body>
+
+</html>

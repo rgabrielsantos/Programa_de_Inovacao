@@ -1,0 +1,19 @@
+Crie uma página web com header contendo uma "logo" de texto com o nome treinandoFunções(ou outro nome que achar legal) e um menu que leva para uma seção com cada uma das questões que faremos a seguir. Em cada questão, construa a section colocando título para a questão(ex.: 1.formatação de nomes) inputs e fazendo com que a execução seja exibida na própria seção (sem ser no console). Estilize para que a página tenha cores e elementos alinhados de um jeito organizado. Coloque uma padronização de cores nos botões.
+
+Questão 1:
+Crie uma função normalizarNome(nome) que:
+-receba um nome como "jõao da silva";
+-remova os espaços extras do início e do fim com trim();
+-divida o nome em partes usando split();
+-percorra as partes com forEach();
+-transforme cada parte para começar com letra maiúscula usando slice();
+-retorne o nome completo formatad.
+Depois, use a função em um array de nomes e exiba os resultados.
+
+Questão 2:
+considere o array
+const produtos = ["Notebook - eletrônico","Mouse - Eletrônico","Cadeira - Móvel", "Teclado - Eletrônico","Mesa - Móvel"];
+
+Crie um filtro em que a pessoa consiga usar um select para selecionar a categoria do produto (eletrônico ou móvel) e seja exibido uma imagem e o nome do produto.
+
+Use uma função que faça a filtragem do array com base na categoria informada

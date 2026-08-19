@@ -1,0 +1,168 @@
+/* Configurações Globais */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Menu de Navegação */
+header {
+    background-color: #2c3e50;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+#menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+#menu a:hover {
+    background-color: #34495e;
+}
+
+/* Título Principal */
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 30px;
+}
+
+/* Conteúdo Principal */
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Seção do Exercício */
+section {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #2980b9;
+    margin-top: 0;
+}
+
+/* Formulário e Inputs Gerais */
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Regra padrão para botões de formulário */
+button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #219653;
+}
+
+/* Resultado Nome */
+#exibirNome {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #27ae60;
+    text-align: center;
+}
+
+/* --- ÁREA DO FILTRO E SELEÇÃO --- */
+
+/* Estilo da Caixinha de Seleção (Select) */
+#categoria {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#categoria:focus {
+    border-color: #4CAF50;
+}
+
+/* Estilo Específico do Botão de Filtrar */
+#selecao {
+    width: auto; /* Sobrescreve o width: 100% do botão padrão */
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+#selecao:hover {
+    background-color: #45a049;
+}
+
+#selecao:active {
+    transform: scale(0.98);
+}
+
+/* Estilo do Contêiner da Imagem */
+#resultado {
+    margin-top: 25px;
+    text-align: center; /* Garante centralização do conteúdo dentro dele */
+}
+
+/* Estilo da Imagem inserida pelo JS */
+#resultado img {
+    max-width: 280px; /* Corrigido de 50px para 280px */
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    display: block;
+    margin: 0 auto; /* Centraliza a imagem horizontalmente */
+}
