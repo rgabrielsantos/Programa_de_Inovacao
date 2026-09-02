@@ -1,16 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ex01</title>
+    <title>Exercícios JavaScript</title>
 </head>
+
 <body>
-    <h2>Questão 7:</h2>
-    <label for="nome">Nome:</label>
+    <!-- QUESTÃO 7 -->
+    <h2>Questão 7: Formatar Nome</h2>
+    <label for="nome-input">Nome:</label>
     <input type="text" id="nome-input">
-    <button id="btn-formatar-nome">formatar nome</button>
+    <button type="button" id="btn-formatar-nome">formatar nome</button>
     <p id="exibir"></p>
+
+    <hr>
+    <!-- QUESTÃO 8 -->
+    <h2>Questão 8: Detector de Spoiler</h2>
+    <p>Digite uma frase e verifique se ela contém a palavra “spoiler”.</p>
+    <label for="inputFrase">Frase: </label>
+    <input type="text" id="inputFrase">
+    <button type="button" id="btn-enviar">enviar frase</button>
+    <p id="saida"></p>
+
+    <hr>
+
+    <!-- QUESTÃO 9 -->
+    <h2>Questão 9: Limpador de CPF</h2>
+    <p>Limpe o cpf de modo a exibir apenas os números.</p>
+    <label for="inputCampo">CPF:</label>
+    <input type="text" id="inputCampo" placeholder="123.456.789-10">
+    <button type="button" id="btn-cpf">enviar cpf</button>
+    <!-- Adicionado um parágrafo para exibir o resultado na tela -->
+    <p id="saida-cpf"></p>
+
+    <hr>
+
+    <!-- QUESTÃO 10 -->
+    <!-- <h2>Questão 10: Lista de Frutas</h2>
+    <p>Separe a lista de modo a exibir cada fruta em uma linha sem espaços extras e sem caracteres especiais.</p>
+    Adicionado o texto "Frutas:" dentro da label
+    <label for="inputFruta">Frutas:</label>
+    <input type="text" id="inputFruta" placeholder="uva, banana, maçã">
+    <button type="button" id="btn-fruta">enviar fruta</button>
+    <p id="resultado-fruta"></p> -->
+
+    <!--IMPORTAÇÃO DO JS (Sempre no final do body)<-->
     <script src="funcoes.js"></script>
 </body>
+
 </html>
