@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CONECTA_OSC, portfólio de Gabriel Santos Rodrigues</title>
+<meta name="description" content="Projeto final do Programa de Inovação e Tecnologia do CAEC: plataforma web que conecta as organizações da sociedade civil de Camaçari a quem quer ajudar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231d5688%27/%3E%3Cpath d=%27M16 24s-8-4.8-8-10.4C8 10.6 10.2 9 12.4 9c1.5 0 2.9.8 3.6 2 .7-1.2 2.1-2 3.6-2C21.8 9 24 10.6 24 13.6 24 19.2 16 24 16 24z%27 fill=%27%23fff%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: leitura em coluna única de 1080px, hero com tagline gigante e a tela real do sistema em moldura de navegador. Paleta herdada do design system do próprio projeto. */
+:root {
+  --bg: #f5f9fd;
+  --surface: #ffffff;
+  --ink: #14293f;
+  --muted: #53667b;
+  --line: #d7e3ee;
+  --accent: #2a6fa8;
+  --tint: #e2f1fc;
+  --coral: #c63a20;
+  --btn-bg: #1d5688;
+  --btn-ink: #ffffff;
+  --shadow: 0 1px 2px rgba(20, 41, 63, .06), 0 12px 32px -12px rgba(20, 41, 63, .22);
+  --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0d1a2a;
+    --surface: #142538;
+    --ink: #e6eef6;
+    --muted: #9db0c4;
+    --line: #27405a;
+    --accent: #6cb2ec;
+    --tint: #17324c;
+    --coral: #ff8b74;
+    --btn-bg: #6cb2ec;
+    --btn-ink: #0d1a2a;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px -12px rgba(0, 0, 0, .6);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0d1a2a;
+  --surface: #142538;
+  --ink: #e6eef6;
+  --muted: #9db0c4;
+  --line: #27405a;
+  --accent: #6cb2ec;
+  --tint: #17324c;
+  --coral: #ff8b74;
+  --btn-bg: #6cb2ec;
+  --btn-ink: #0d1a2a;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px -12px rgba(0, 0, 0, .6);
+}
+
+[hidden] { display: none !important; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img, video { max-width: 100%; display: block; }
+a { color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.08; letter-spacing: -0.02em; }
+p { margin: 0; }
+
+.wrap { width: min(1080px, 100% - 40px); margin-inline: auto; }
+section { padding-block: 72px; }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.lead { font-size: 19px; color: var(--muted); max-width: 62ch; }
+.section-head { display: grid; gap: 14px; margin-bottom: 36px; }
+.section-head h2 { font-size: clamp(30px, 4.4vw, 46px); font-weight: 800; max-width: 22ch; }
+
+/* Cabeçalho */
+.top { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; justify-content: space-between; padding-block: 22px; }
+.brand { font-family: var(--display); font-weight: 800; font-size: 18px; color: var(--ink); text-decoration: none; }
+.top nav { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 15px; font-weight: 600; }
+.top nav a { color: var(--muted); text-decoration: none; }
+.top nav a:hover { color: var(--ink); }
+
+/* Hero */
+.hero { padding-top: 28px; padding-bottom: 56px; }
+.hero-grid { display: grid; gap: 44px; }
+.hero h1 { font-size: clamp(44px, 8.4vw, 104px); font-weight: 800; line-height: .98; letter-spacing: -0.035em; max-width: 13ch; }
+.hero h1 em { font-style: normal; color: var(--accent); background: linear-gradient(transparent 86%, var(--tint) 86% 96%, transparent 96%); }
+.project-name { display: inline-block; font-family: var(--body); font-size: 15px; font-weight: 700; letter-spacing: .06em; padding: 6px 12px; border-radius: 999px; background: var(--tint); color: var(--ink); margin-bottom: 22px; }
+.hero .lead { margin-top: 26px; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 26px; padding: 0; list-style: none; font-size: 15px; color: var(--muted); }
+.meta strong { color: var(--ink); font-weight: 600; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 12px; font-weight: 700; font-size: 16px; text-decoration: none; border: 2px solid var(--btn-bg); background: var(--btn-bg); color: var(--btn-ink); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn:hover { filter: brightness(1.08); }
+.btn.ghost:hover { border-color: var(--accent); filter: none; }
+
+.frame { border-radius: 14px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden; }
+.frame .bar { display: flex; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--line); background: var(--tint); }
+.frame .bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--line); display: block; }
+.frame img { width: 100%; height: auto; }
+
+/* Números */
+.numbers { padding-block: 0 8px; }
+.numbers ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); border: 1px solid var(--line); border-radius: 16px; background: var(--surface); overflow: hidden; }
+.numbers li { padding: 24px 26px; border-inline-start: 1px solid var(--line); }
+.numbers li:first-child { border-inline-start: 0; }
+.numbers b { display: block; font-family: var(--display); font-size: 40px; font-weight: 800; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.numbers span { display: block; margin-top: 8px; font-size: 15px; color: var(--muted); line-height: 1.4; }
+
+/* Problema e solução */
+.two { display: grid; gap: 28px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+.card h3 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+.card p { color: var(--muted); }
+.card p + p { margin-top: 12px; }
+
+/* Fluxo */
+.flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: passo; }
+.flow li { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 20px 20px 74px; counter-increment: passo; }
+.flow li::before { content: counter(passo); position: absolute; left: 20px; top: 18px; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--tint); color: var(--accent); font-family: var(--display); font-weight: 800; font-size: 18px; }
+.flow li.key { border-color: var(--accent); box-shadow: inset 4px 0 0 var(--accent); }
+.flow h3 { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+.flow p { font-size: 15.5px; color: var(--muted); line-height: 1.5; }
+.callout { margin-top: 22px; padding: 18px 22px; border-radius: 12px; background: var(--tint); font-size: 16px; }
+.callout b { font-weight: 700; }
+
+/* Perfis */
+.roles { display: grid; gap: 18px; }
+.role { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+.role .tag { align-self: flex-start; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--tint); color: var(--ink); }
+.role h3 { font-size: 24px; font-weight: 700; }
+.role ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 16px; display: grid; gap: 6px; }
+
+/* Telas */
+.shots { display: grid; gap: 22px; }
+.shot { margin: 0; display: grid; gap: 10px; }
+.shot button { all: unset; display: block; cursor: zoom-in; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: var(--surface); }
+.shot button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.shot img { width: 100%; height: auto; }
+.shot figcaption { font-size: 15px; color: var(--muted); }
+.shot figcaption b { color: var(--ink); font-weight: 600; }
+.phones { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 18px; justify-items: center; align-items: center; background: var(--tint); border-radius: 12px; border: 1px solid var(--line); }
+.phones img { width: 100%; max-width: 230px; border-radius: 18px; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.note { margin-top: 18px; font-size: 14.5px; color: var(--muted); }
+
+dialog { border: 0; padding: 0; background: transparent; max-width: min(1200px, 96vw); width: 100%; }
+dialog::backdrop { background: rgba(8, 16, 26, .82); }
+dialog img { width: 100%; height: auto; border-radius: 12px; }
+dialog form { text-align: right; margin-bottom: 8px; }
+dialog .close { all: unset; cursor: pointer; padding: 8px 16px; border-radius: 999px; background: var(--surface); color: var(--ink); font-weight: 700; font-size: 15px; }
+dialog .close:focus-visible { outline: 3px solid var(--accent); }
+
+/* Evolução */
+.evo { display: grid; gap: 22px; }
+.evo-pair { display: grid; gap: 22px; }
+
+/* Demo */
+.video { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: #000; }
+.video video { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+
+/* Tecnologia */
+.arch { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; margin-bottom: 22px; }
+.arch svg { width: 100%; max-width: 700px; height: auto; margin-inline: auto; display: block; }
+.arch .box { fill: var(--surface); stroke: var(--accent); stroke-width: 1.5; }
+.arch .hi { fill: var(--tint); stroke: var(--accent); stroke-width: 2; }
+.arch .wrapbox { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 5 5; }
+.arch text { fill: var(--ink); font-family: var(--body); font-size: 15px; }
+.arch .sub { fill: var(--muted); font-size: 13px; }
+.arch .ttl { font-weight: 700; }
+.arch .line { stroke: var(--accent); stroke-width: 1.75; fill: none; }
+.arch marker path { fill: var(--accent); }
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 16px; }
+th, td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; background: var(--tint); }
+td:first-child { font-weight: 700; white-space: nowrap; }
+td:nth-child(3) { color: var(--muted); }
+
+/* Segurança */
+.sec { display: grid; gap: 14px; }
+.sec div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+.sec h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.sec p { font-size: 15.5px; color: var(--muted); line-height: 1.5; }
+
+/* Roadmap */
+.road { display: grid; gap: 14px; }
+.road > div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+.road h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.road p { font-size: 15.5px; color: var(--muted); line-height: 1.5; }
+.pill { display: inline-block; font-size: 12.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; margin-bottom: 10px; }
+.pill.done { background: var(--tint); color: var(--accent); }
+.pill.next { border: 1px solid var(--line); color: var(--muted); }
+
+/* Equipe e curso */
+.team { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; padding: 0; list-style: none; }
+.team li { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-weight: 600; }
+.course { display: grid; gap: 8px 40px; margin: 0; }
+.course div { display: grid; gap: 2px; }
+.course dt { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.course dd { margin: 0; font-weight: 600; }
+
+footer { border-top: 1px solid var(--line); padding-block: 40px 56px; font-size: 15px; color: var(--muted); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 32px; justify-content: space-between; align-items: center; }
+footer nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-weight: 600; }
+
+@media (min-width: 760px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .two { grid-template-columns: 1fr 1fr; }
+  .roles { grid-template-columns: repeat(3, 1fr); }
+  .shots { grid-template-columns: 1fr 1fr; }
+  .evo-pair { grid-template-columns: 1fr 1fr; }
+  .sec { grid-template-columns: 1fr 1fr; }
+  .road { grid-template-columns: repeat(3, 1fr); }
+  .course { grid-template-columns: repeat(3, auto); justify-content: start; }
+}
+@media (min-width: 1000px) {
+  .flow { grid-template-columns: repeat(5, 1fr); }
+  .flow li { padding: 70px 18px 20px; }
+  .flow li::before { left: 18px; top: 18px; }
+  .flow li.key { box-shadow: inset 0 4px 0 var(--accent); }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a class="brand" href="#inicio">Gabriel Santos Rodrigues</a>
+  <nav aria-label="Seções">
+    <a href="#projeto">Projeto</a>
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#telas">Telas</a>
+    <a href="#demonstracao">Demonstração</a>
+    <a href="#tecnologia">Tecnologia</a>
+    <a href="#equipe">Equipe</a>
+  </nav>
+</header>
+
+<main id="inicio">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="project-name">CONECTA_OSC · Projeto final do CAEC</span>
+      <h1>Sua vontade de ajudar encontra <em>quem precisa.</em></h1>
+      <p class="lead">Plataforma web que reúne as necessidades das organizações da sociedade civil de Camaçari em um só lugar. As OSCs publicam o que precisam, e qualquer pessoa pode se oferecer para ajudar sem criar conta.</p>
+      <ul class="meta">
+        <li><strong>Camaçari, BA</strong></li>
+        <li><strong>Equipe de 5 pessoas</strong>, Grupo A</li>
+        <li><strong>MVP concluído</strong> em outubro de 2026</li>
+      </ul>
+      <div class="actions">
+        <a class="btn" id="btn-ao-vivo" href="#demonstracao" target="_blank" rel="noopener" hidden>Abrir o projeto funcionando</a>
+        <a class="btn ghost" href="https://github.com/LunaLu31/projeto_osc">Ver o código no GitHub</a>
+        <a class="btn ghost" id="btn-demo" href="#demonstracao">Assistir à demonstração</a>
+      </div>
+    </div>
+    <div class="frame" aria-hidden="false">
+      <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+      <img src="assets/feed.webp" width="1440" height="810" alt="Página inicial do CONECTA_OSC com o título 'Sua vontade de ajudar encontra quem precisa', os números da rede e os botões para encontrar uma causa.">
+    </div>
+  </div>
+</section>
+
+<div class="wrap numbers">
+  <ul>
+    <li><b>3</b><span>perfis de uso: apoiador, OSC e administrador</span></li>
+    <li><b>142</b><span>testes automatizados, 112 no back-end e 30 no front-end</span></li>
+    <li><b>AA</b><span>acessibilidade WCAG 2.1 nível AA</span></li>
+    <li><b>3.1</b><span>API REST documentada em OpenAPI</span></li>
+  </ul>
+</div>
+
+<section id="projeto">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">O projeto</span>
+      <h2>Quem quer ajudar nem sempre sabe onde.</h2>
+      <p class="lead">O desafio veio da REDCAM, uma rede real de organizações de Camaçari. O grupo transformou esse cenário em uma plataforma pensada para uma OSC de verdade usar no dia seguinte.</p>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>O problema</h3>
+        <p>As necessidades das OSCs circulam por mensagens, redes sociais e indicações pessoais. Boa parte nunca chega a quem poderia atender.</p>
+        <p>Quem quer ajudar não sabe quais organizações precisam de quê, nem se o pedido é legítimo. O apoio se perde dos dois lados.</p>
+      </div>
+      <div class="card">
+        <h3>A solução</h3>
+        <p>Um lugar único e confiável. Cada demanda é publicada pela própria organização, com categoria, quantidade, prazo e status.</p>
+        <p>O apoiador filtra, escolhe e manifesta interesse em poucos cliques. O contato dele vai somente para a OSC responsável.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona" style="padding-top:8px">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Como funciona</span>
+      <h2>Da necessidade publicada à demanda concluída.</h2>
+    </div>
+    <ol class="flow">
+      <li><h3>Admin cadastra a OSC</h3><p>A equipe da rede registra a organização e gera a senha inicial de acesso.</p></li>
+      <li><h3>OSC publica a demanda</h3><p>Categoria, quantidade, prazo e descrição do que a organização precisa.</p></li>
+      <li><h3>Apoiador encontra no feed</h3><p>Demandas urgentes aparecem primeiro, com filtros por categoria, status e busca.</p></li>
+      <li><h3>Manifesta interesse</h3><p>Nome, contato, tipo de apoio e mensagem. Não exige cadastro.</p></li>
+      <li class="key"><h3>OSC acompanha</h3><p>Vê os contatos no painel e atualiza o status até concluir. Concluída, sai do feed público.</p></li>
+    </ol>
+    <p class="callout"><b>Privacidade por padrão (LGPD).</b> Telefone e e-mail do apoiador aparecem apenas no painel da OSC responsável, nunca no feed nem na API pública.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Perfis</span>
+      <h2>Cada pessoa com o seu fluxo.</h2>
+    </div>
+    <div class="roles">
+      <article class="role">
+        <span class="tag">Sem login</span>
+        <h3>Apoiador</h3>
+        <ul>
+          <li>Feed com as demandas ativas, urgentes primeiro</li>
+          <li>Filtros por categoria, status e urgência, e busca por título ou organização</li>
+          <li>Botão "Quero ajudar" com formulário simples</li>
+          <li>Tema claro e escuro</li>
+        </ul>
+      </article>
+      <article class="role">
+        <span class="tag">E-mail e senha</span>
+        <h3>OSC</h3>
+        <ul>
+          <li>Painel com gráficos de contatos por mês, por tipo e demandas por status</li>
+          <li>Criar, editar, excluir e concluir demandas</li>
+          <li>Lista de contatos de quem quer ajudar, com filtros</li>
+          <li>Opção "Manter conectado" por 7 dias</li>
+        </ul>
+      </article>
+      <article class="role">
+        <span class="tag">E-mail e senha</span>
+        <h3>Administrador</h3>
+        <ul>
+          <li>Visão geral da rede com gráficos de engajamento</li>
+          <li>Alertas de prazos vencidos e OSCs sem demandas ativas</li>
+          <li>Cadastro e edição de OSCs</li>
+          <li>Moderação de qualquer demanda</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="telas" style="padding-top:8px">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Telas</span>
+      <h2>O sistema funcionando.</h2>
+      <p class="lead">Clique em uma imagem para ampliar.</p>
+    </div>
+    <div class="shots">
+      <figure class="shot">
+        <button type="button" data-full="assets/demanda.webp" data-alt="Detalhe de uma demanda de cestas básicas, com os dados da OSC e o formulário 'Como você quer ajudar?'">
+          <img src="assets/demanda.webp" width="1440" height="810" loading="lazy" alt="Detalhe de uma demanda de cestas básicas, com os dados da OSC e o formulário 'Como você quer ajudar?'">
+        </button>
+        <figcaption><b>Detalhe da demanda.</b> O que é preciso, quantidade, prazo, a OSC e o formulário de interesse.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button type="button" data-full="assets/painel-osc.webp" data-alt="Painel da OSC com indicadores e o gráfico de contatos por mês">
+          <img src="assets/painel-osc.webp" width="1440" height="810" loading="lazy" alt="Painel da OSC com indicadores e o gráfico de contatos por mês">
+        </button>
+        <figcaption><b>Painel da OSC.</b> Indicadores e contatos recebidos por mês.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button type="button" data-full="assets/painel-admin.webp" data-alt="Visão geral do administrador com o gráfico de manifestações por mês">
+          <img src="assets/painel-admin.webp" width="1440" height="810" loading="lazy" alt="Visão geral do administrador com o gráfico de manifestações por mês">
+        </button>
+        <figcaption><b>Painel do administrador.</b> A saúde da rede em um só lugar.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button type="button" data-full="assets/moderacao.webp" data-alt="Aba de moderação com a tabela de demandas da rede e o seletor de status">
+          <img src="assets/moderacao.webp" width="1440" height="810" loading="lazy" alt="Aba de moderação com a tabela de demandas da rede e o seletor de status">
+        </button>
+        <figcaption><b>Moderação.</b> Status e exclusão de qualquer demanda da rede.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button type="button" data-full="assets/feed-escuro.webp" data-alt="Página inicial no tema escuro">
+          <img src="assets/feed-escuro.webp" width="1440" height="810" loading="lazy" alt="Página inicial no tema escuro">
+        </button>
+        <figcaption><b>Tema escuro.</b> Aplicado já no HTML renderizado pelo servidor.</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="phones">
+          <img src="assets/celular-feed.webp" width="500" height="844" loading="lazy" alt="Página inicial no celular">
+          <img src="assets/celular-admin.webp" width="500" height="844" loading="lazy" alt="Painel do administrador no celular, com o menu de ícones">
+        </div>
+        <figcaption><b>No celular.</b> Feed e painel com menu de ícones.</figcaption>
+      </figure>
+    </div>
+    <p class="note">As telas usam dados fictícios de demonstração.</p>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Evolução</span>
+      <h2>Do rascunho ao produto.</h2>
+      <p class="lead">O wireframe já separava o feed, o detalhe da demanda e a área da OSC. A versão final manteve essa estrutura e ganhou painéis, gráficos e acessibilidade.</p>
+    </div>
+    <div class="evo">
+      <figure class="shot">
+        <button type="button" data-full="assets/wireframe.webp" data-alt="Wireframe com quatro telas de celular: entrada, feed de demandas, detalhes da demanda e minhas demandas">
+          <img src="assets/wireframe.webp" width="1800" height="947" loading="lazy" alt="Wireframe com quatro telas de celular: entrada, feed de demandas, detalhes da demanda e minhas demandas">
+        </button>
+        <figcaption><b>Wireframe.</b> Entrada, feed, detalhe e "Minhas demandas".</figcaption>
+      </figure>
+      <div class="evo-pair">
+        <figure class="shot">
+          <button type="button" data-full="assets/primeiro-prototipo.webp" data-alt="Primeiro protótipo da página inicial, ainda com o nome Redcam">
+            <img src="assets/primeiro-prototipo.webp" width="1400" height="695" loading="lazy" alt="Primeiro protótipo da página inicial, ainda com o nome Redcam">
+          </button>
+          <figcaption><b>Primeiro protótipo.</b> Ainda com o nome Redcam e sem dados.</figcaption>
+        </figure>
+        <figure class="shot">
+          <button type="button" data-full="assets/feed.webp" data-alt="Página inicial da versão final, CONECTA_OSC, com dados da rede">
+            <img src="assets/feed.webp" width="1440" height="810" loading="lazy" alt="Página inicial da versão final, CONECTA_OSC, com dados da rede">
+          </button>
+          <figcaption><b>Versão final.</b> CONECTA_OSC, com os números da rede.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demonstracao" style="padding-top:8px">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Demonstração</span>
+      <h2>O percurso completo em dois minutos.</h2>
+      <p class="lead">O apoiador encontra uma demanda, manifesta interesse, a OSC recebe o contato e o administrador acompanha a rede.</p>
+    </div>
+    <div class="video">
+      <video controls preload="metadata" poster="assets/demo-poster.webp" aria-label="Demonstração do CONECTA_OSC, com duração de cerca de 2 minutos">
+        <source src="assets/demo.mp4" type="video/mp4">
+        Seu navegador não reproduz este vídeo.
+      </video>
+    </div>
+    <p class="note" id="nota-ao-vivo" hidden>Prefere testar? <a id="link-ao-vivo" href="#" target="_blank" rel="noopener">Abra o projeto funcionando</a>. O feed e o formulário de interesse são públicos; as áreas da OSC e do administrador exigem login.</p>
+  </div>
+</section>
+
+<section id="tecnologia">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Tecnologia</span>
+      <h2>Um só login, dois jeitos de usar: site e API.</h2>
+      <p class="lead">O mesmo token JWT autentica o site (em cookie) e a API (no cabeçalho Bearer). Isso deixa a base pronta para um aplicativo mobile.</p>
+    </div>
+
+    <div class="arch">
+      <svg viewBox="0 0 700 480" role="img" aria-labelledby="arch-t arch-d">
+        <title id="arch-t">Arquitetura do CONECTA_OSC</title>
+        <desc id="arch-d">O navegador acessa as rotas web e os clientes da API acessam a API REST. Ambos passam pelo guard JWT e pelas regras de negócio do Laravel, que roda em contêiner no Vercel e consulta o banco MySQL, hospedado no TiDB Cloud em produção.</desc>
+        <defs>
+          <marker id="seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker>
+        </defs>
+        <rect class="box" x="40" y="8" width="270" height="62" rx="12"/>
+        <text class="ttl" x="175" y="34" text-anchor="middle">Navegador</text>
+        <text class="sub" x="175" y="54" text-anchor="middle">React 19 + TypeScript (Inertia)</text>
+        <rect class="box" x="390" y="8" width="270" height="62" rx="12"/>
+        <text class="ttl" x="525" y="34" text-anchor="middle">Clientes da API</text>
+        <text class="sub" x="525" y="54" text-anchor="middle">apps e parceiros</text>
+
+        <path class="line" d="M175 70 V138" marker-end="url(#seta)"/>
+        <path class="line" d="M525 70 V138" marker-end="url(#seta)"/>
+        <text class="sub" x="185" y="108">JWT em cookie</text>
+        <text class="sub" x="535" y="108">JWT no Bearer</text>
+
+        <rect class="wrapbox" x="20" y="108" width="660" height="268" rx="16"/>
+        <text class="sub" x="36" y="128">Laravel 12 · PHP 8.4</text>
+        <text class="sub" x="664" y="368" text-anchor="end">contêiner FrankenPHP no Vercel</text>
+        <rect class="box" x="40" y="142" width="270" height="50" rx="10"/>
+        <text class="ttl" x="175" y="172" text-anchor="middle">Site · rotas web</text>
+        <rect class="box" x="390" y="142" width="270" height="50" rx="10"/>
+        <text class="ttl" x="525" y="172" text-anchor="middle">API REST · /api/v1</text>
+
+        <path class="line" d="M175 192 V222" marker-end="url(#seta)"/>
+        <path class="line" d="M525 192 V222" marker-end="url(#seta)"/>
+        <rect class="hi" x="40" y="222" width="620" height="48" rx="10"/>
+        <text class="ttl" x="350" y="252" text-anchor="middle">Guard JWT · cookie HttpOnly e Bearer</text>
+        <path class="line" d="M350 270 V300" marker-end="url(#seta)"/>
+        <rect class="box" x="40" y="300" width="620" height="50" rx="10"/>
+        <text class="ttl" x="350" y="330" text-anchor="middle">Regras de negócio · controllers, services e policies</text>
+
+        <path class="line" d="M350 376 V418" marker-end="url(#seta)"/>
+        <text class="sub" x="362" y="402">Eloquent (PDO)</text>
+        <rect class="box" x="230" y="420" width="240" height="52" rx="12"/>
+        <text class="ttl" x="350" y="451" text-anchor="middle">MySQL 8 · TiDB Cloud</text>
+      </svg>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Camada</th><th scope="col">Tecnologias</th><th scope="col">Por quê</th></tr></thead>
+        <tbody>
+          <tr><td>Back-end</td><td>PHP 8.2+ (8.4 em produção), Laravel 12, Eloquent</td><td>Orientação a objetos, validação, autorização e consultas parametrizadas.</td></tr>
+          <tr><td>Front-end</td><td>React 19, TypeScript, Inertia.js 3, React Compiler</td><td>Telas sem recarregar a página, com rotas e props tipadas.</td></tr>
+          <tr><td>Estilo</td><td>Tailwind CSS 4 e design system próprio</td><td>Mobile first, com tema claro e escuro por tokens.</td></tr>
+          <tr><td>Banco</td><td>MySQL 8, TiDB Cloud em produção</td><td>Modelo físico em script SQL, espelhado pelas migrations. Em produção, um banco compatível com MySQL no plano gratuito.</td></tr>
+          <tr><td>Autenticação</td><td>JWT HS256</td><td>O mesmo token vale no site e na API.</td></tr>
+          <tr><td>Deploy</td><td>Docker, FrankenPHP, Vercel</td><td>Uma imagem com PHP 8.4 e o front já compilado. O Vercel cuida do HTTPS e das instâncias.</td></tr>
+          <tr><td>Qualidade</td><td>PHPUnit, Vitest, Testing Library, axe-core, ESLint, Pint</td><td>Regressões e acessibilidade conferidas a cada mudança.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Segurança e privacidade</span>
+      <h2>Dados de quem ajuda protegidos desde o desenho.</h2>
+    </div>
+    <div class="sec">
+      <div><h3>LGPD</h3><p>Contato do apoiador visível apenas à OSC responsável. Ele nunca aparece no feed nem na API pública.</p></div>
+      <div><h3>Login por JWT</h3><p>Token em cookie HttpOnly e SameSite=Lax. Sair invalida o token, e trocar a senha derruba todos os logins da conta.</p></div>
+      <div><h3>Senhas</h3><p>Armazenadas com bcrypt, mínimo de 8 caracteres com letras e números e bloqueio após 5 tentativas.</p></div>
+      <div><h3>Formulário público</h3><p>Limite por IP, campo armadilha, tempo mínimo de envio e Cloudflare Turnstile opcional contra robôs.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Roadmap</span>
+      <h2>O que já existe e o que vem depois.</h2>
+    </div>
+    <div class="road">
+      <div>
+        <span class="pill done">Concluída</span>
+        <h3>Versão A, o essencial</h3>
+        <p>Cadastro e login de OSCs e admin, CRUD de demandas, feed com filtros, interesse sem login, status e painel do administrador.</p>
+      </div>
+      <div>
+        <span class="pill done">Entregue</span>
+        <h3>Versão B, evolução</h3>
+        <p>Painel da OSC com gráficos. Próximos passos: login de apoiadores com histórico, notificações por e-mail, filtros por bairro e upload de foto.</p>
+      </div>
+      <div>
+        <span class="pill next">Visão futura</span>
+        <h3>Versão C</h3>
+        <p>Aplicativo mobile, integração com empresas (ESG), mapa interativo e doação financeira. A base já está pronta na API REST.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipe" style="padding-top:8px">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Equipe e formação</span>
+      <h2>Feito em grupo, com a comunidade de Camaçari em mente.</h2>
+      <p class="lead">O CONECTA_OSC é o trabalho de conclusão do Grupo A no Programa de Inovação e Tecnologia do CAEC, em parceria com o projeto de extensão DAX Code.</p>
+    </div>
+    <ul class="team" aria-label="Integrantes do Grupo A">
+      <li>Gabriel Rodrigues</li>
+      <li>Engenilson</li>
+      <li>Mariana</li>
+      <li>Luna</li>
+      <li>Lauane</li>
+    </ul>
+    <dl class="course" style="margin-top:36px">
+      <div><dt>Curso</dt><dd>Desenvolvimento de Software</dd></div>
+      <div><dt>Carga horária</dt><dd>288 horas</dd></div>
+      <div><dt>Período</dt><dd>10 de abril a 30 de outubro de 2026</dd></div>
+    </dl>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Feito por <strong>Gabriel Santos Rodrigues</strong></span>
+    <nav aria-label="Links">
+      <a href="https://github.com/LunaLu31/projeto_osc">Código do CONECTA_OSC</a>
+      <a href="https://github.com/rgabrielsantos/Programa_de_Inovacao">Jornada no curso</a>
+      <a href="https://www.linkedin.com/in/rgabrielsantosdev/">LinkedIn</a>
+      <a href="https://github.com/rgabrielsantos">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+<dialog id="lightbox" aria-label="Imagem ampliada">
+  <form method="dialog"><button class="close" type="submit">Fechar</button></form>
+  <img id="lightbox-img" alt="">
+</dialog>
+
+<script>
+(function () {
+  // Endereço do CONECTA_OSC no ar. Preencha depois do deploy, por exemplo "https://conecta-osc.vercel.app".
+  // Enquanto estiver vazio, os botões de acesso direto ficam ocultos.
+  var PROJETO_URL = "https://conecta-osc.vercel.app/";
+  if (PROJETO_URL) {
+    ["btn-ao-vivo", "link-ao-vivo"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.href = PROJETO_URL;
+    });
+    ["btn-ao-vivo", "nota-ao-vivo"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.hidden = false;
+    });
+    var d = document.getElementById("btn-demo");
+    if (d) d.className = "btn ghost";
+  }
+  var dlg = document.getElementById('lightbox');
+  var img = document.getElementById('lightbox-img');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
+  document.querySelectorAll('button[data-full]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      img.src = b.getAttribute('data-full');
+      img.alt = b.getAttribute('data-alt') || '';
+      dlg.showModal();
+    });
+  });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+})();
+</script>
+</body>
+</html>
