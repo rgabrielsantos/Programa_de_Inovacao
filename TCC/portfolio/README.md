@@ -25,7 +25,7 @@ npx vercel@latest deploy --prod
 
 Ou pelo painel, para publicar a cada push:
 
-1. No Vercel, clique em Add New, Project e importe o repositório `rgabrielsantos/DaxCode`.
+1. No Vercel, clique em Add New, Project e importe o repositório `rgabrielsantos/Programa_de_Inovacao`.
 2. Em Root Directory, escolha `TCC/portfolio`.
 3. Em Framework Preset, deixe `Other`. Build Command e Output Directory ficam vazios.
 4. Clique em Deploy.
